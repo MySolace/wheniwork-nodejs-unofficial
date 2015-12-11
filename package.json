@@ -1,0 +1,13 @@
+{
+  "name": "wheniwork-unofficial",
+  "version": "0.1.0",
+  "description": "Wrapper around WhenIWork API. Refer to http://dev.wheniwork.com/ for access methods.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Chris Johnson (chris@cjcodes.com)",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.67.0"
+  }
+}
