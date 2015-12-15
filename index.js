@@ -63,6 +63,13 @@ WhenIWork.prototype.get = function () {
       , headers = params[2]
       , callback = params[3]
     ;
+
+    var u = '';
+    for (var i in requestParams) {
+        u = u + i + '=' + requestParams[i] + '&';
+    }
+
+    var uri = method + '?' + u;
         
     this._makeRequest(method, 'get', requestParams, headers, callback);
 };
