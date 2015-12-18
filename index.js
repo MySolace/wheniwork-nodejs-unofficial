@@ -71,7 +71,7 @@ WhenIWork.prototype.get = function () {
 
     var uri = method + '?' + u;
         
-    this._makeRequest(method, 'get', requestParams, headers, callback);
+    this._makeRequest(uri, 'get', requestParams, headers, callback);
 };
 
 WhenIWork.prototype.post = function () {
