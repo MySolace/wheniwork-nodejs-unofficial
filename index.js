@@ -151,6 +151,7 @@ WhenIWork.prototype._makeRequest = function(method, request, params, headers, ca
     Request(options, function (error, response, body) {
         if (error) {
             console.log(error);
+            callback(error);
         } else {
             callback(JSON.parse(body));
         }
