@@ -11,7 +11,7 @@ var WhenIWork = function (key, email, password) {
     this.authenticated = false;
 };
 
-WhenIWork.prototype._login = function (key, email, password) {
+WhenIWork.prototype._login = function (key, email, password, failureCallback) {
     var self = this;
     var params = {
         username: email,
@@ -25,6 +25,9 @@ WhenIWork.prototype._login = function (key, email, password) {
         } else {
             // we didn't receive a token. log why
             console.log(response);
+            if (typeof failureCallback !== 'undefined') {
+                failureCallback(response);
+            }
         }
     });
 };
