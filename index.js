@@ -3,11 +3,11 @@ var VERSION = '0.1.0';
 
 var Request = require('request');
 
-var WhenIWork = function (key, email, password) {
+var WhenIWork = function (key, email, password, failureCallback) {
     this.token = '';
     this.headers = {};
     this.endpoint = 'https://api.wheniwork.com/2';
-    this._login(key, email, password);
+    this._login(key, email, password, failureCallback);
     this.authenticated = false;
 };
 
