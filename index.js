@@ -3,24 +3,29 @@ var VERSION = '0.1.0';
 
 var Request = require('request');
 
-var WhenIWork = function (key, email, password, failureCallback) {
+var WhenIWork = function (key, email, password, companyName, failureCallback) {
+    if (typeof companyName==="function") {
+        failureCallback = companyName;
+        companyName = false;
+    }
     this.token = '';
     this.headers = {};
     this.endpoint = 'https://api.wheniwork.com/2';
-    this._login(key, email, password, failureCallback);
+    this._login({key:key, email:email, password:password, companyName:companyName}, failureCallback);
     this.authenticated = false;
 };
 
-WhenIWork.prototype._login = function (key, email, password, failureCallback) {
+WhenIWork.prototype._login = function (options, failureCallback) {
+    // options: {key, email, password, companyName}
     var self = this;
     var params = {
-        username: email,
-        password: password
+        username: options.email,
+        password: options.password
     };
 
-    this._makeRequest('login', 'post', params, {'W-Key': key}, function (response) {
+    this._makeRequest('login', 'post', params, {'W-Key': options.key}, function (response) {
         if (response.login && response.login.token) {
-            self.headers['W-Token'] = response.login.token;
+            self.headers['W-Token'] = options.companyName ? findToken(response, options.companyName) : response.login.token;
             self.authenticated = true;
         } else {
             // we didn't receive a token. log why
@@ -31,6 +36,26 @@ WhenIWork.prototype._login = function (key, email, password, failureCallback) {
         }
     });
 };
+
+function findToken (response, companyName) {
+    var accountId;
+    var correctToken;
+    response.accounts.some(function(account){
+        if (account.company === companyName) {
+            accountId = account.id;
+            return true;
+        }
+        else return false;
+    });
+    response.users.some(function(profile){
+        if (profile.account_id === accountId) {
+            correctToken = profile.token;
+            return true;
+        } 
+        else return false;
+    });
+    return correctToken;
+}
 
 WhenIWork.prototype.setToken = function (token) {
     this.token = token;
