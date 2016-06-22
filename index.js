@@ -1,4 +1,3 @@
-
 var VERSION = '0.1.0';
 
 var Request = require('request');
@@ -40,21 +39,21 @@ WhenIWork.prototype._login = function (options, failureCallback) {
 function findToken (response, companyName) {
     var accountId;
     var correctToken;
-    response.accounts.some(function(account){
-        if (account.company === companyName) {
-            accountId = account.id;
-            return true;
+
+    for (var i = 0; i < response.accounts.length; i++) {
+        if (response.accounts[i].company === companyName) {
+            accountId = response.accounts[i].id;
+            break;
         }
-        else return false;
-    });
-    response.users.some(function(profile){
-        if (profile.account_id === accountId) {
-            correctToken = profile.token;
-            return true;
-        } 
-        else return false;
-    });
-    return correctToken;
+    }
+
+    for (var j = 0; j < response.users.length; j++) {
+        if (response.users[j].account_id === accountId) {
+            return response.users[j].token;
+        }
+    }
+
+    return false;
 }
 
 WhenIWork.prototype.setToken = function (token) {
