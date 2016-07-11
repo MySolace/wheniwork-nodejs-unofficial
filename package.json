@@ -1,14 +1,13 @@
 {
   "name": "wheniwork-unofficial",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/CrisisTextLine/wheniwork-nodejs-unofficial"
+    "type": "git",
+    "url": "https://github.com/CrisisTextLine/wheniwork-nodejs-unofficial"
   },
   "description": "Wrapper around WhenIWork API. Refer to http://dev.wheniwork.com/ for access methods.",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Chris Johnson (chris@cjcodes.com)",
   "license": "ISC",
   "dependencies": {
