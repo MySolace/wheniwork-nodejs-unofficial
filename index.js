@@ -39,7 +39,6 @@ WhenIWork.prototype._login = function (options, failureCallback) {
 
 function findToken (response, companyName) {
     var accountId;
-    var correctToken;
 
     for (var i = 0; i < response.accounts.length; i++) {
         if (response.accounts[i].company === companyName) {
