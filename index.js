@@ -84,6 +84,7 @@ WhenIWork.prototype.setHeaders = function (headers, reset) {
 
 WhenIWork.prototype.get = function () {
     var params = putFunctionLast(arguments, 4);
+    var uri;
 
     var method = params[0]
       , requestParams = params[1]
@@ -96,9 +97,9 @@ WhenIWork.prototype.get = function () {
         u = u + i + '=' + requestParams[i] + '&';
     }
 
-    var uri = method + '?' + u;
+    method.indexOf('?') === -1 ? uri = method + '?' + u : uri = method + '&' + u;
         
-    this._makeRequest(uri, 'get', requestParams, headers, callback);
+    this._makeRequest(uri, 'get', {}, headers, callback);
 };
 
 WhenIWork.prototype.post = function () {
