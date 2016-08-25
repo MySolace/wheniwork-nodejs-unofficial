@@ -1,5 +1,5 @@
 
-var VERSION = '0.2.2';
+var VERSION = '0.2.3';
 
 var Request = require('request');
 
