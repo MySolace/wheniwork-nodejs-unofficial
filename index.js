@@ -111,6 +111,12 @@ WhenIWork.prototype.post = function () {
       , callback = params[3]
     ;
 
+    if (method === 'batch') {
+        requestParams.forEach(function(post) {
+            if (post.url.indexOf('/2') !== 0) post.url = '/2' + post.url;
+        });
+    }
+
     this._makeRequest(method, 'post', requestParams, headers, callback);
 };
 
