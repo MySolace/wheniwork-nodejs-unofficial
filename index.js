@@ -1,5 +1,5 @@
 
-var VERSION = '0.2.4';
+var VERSION = '0.2.5';
 
 var Request = require('request');
 
@@ -98,7 +98,7 @@ WhenIWork.prototype.get = function () {
     }
 
     method.indexOf('?') === -1 ? uri = method + '?' + u : uri = method + '&' + u;
-        
+
     this._makeRequest(uri, 'get', {}, headers, callback);
 };
 
@@ -187,7 +187,13 @@ WhenIWork.prototype._makeRequest = function(method, request, params, headers, ca
             console.trace(error);
             callback(error);
         } else {
-            callback(JSON.parse(body));
+            try {
+                callback(JSON.parse(body));
+            }
+            catch(error) {
+                console.trace(error);
+                callback(error);
+            }
         }
     });
 };
