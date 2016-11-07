@@ -1,5 +1,5 @@
 
-var VERSION = '0.2.5';
+var VERSION = '0.2.6';
 
 var Request = require('request');
 
@@ -157,6 +157,7 @@ WhenIWork.prototype.delete = function () {
 };
 
 WhenIWork.prototype._makeRequest = function(method, request, params, headers, callback) {
+    
     if (method !== 'login' && !this.authenticated) {
         var self = this;
         setTimeout(function (m, r, p, h, c) {
@@ -181,6 +182,7 @@ WhenIWork.prototype._makeRequest = function(method, request, params, headers, ca
         headers: this.headers,
         body: JSON.stringify(params)
     };
+    var JSONbody;
 
     Request(options, function (error, response, body) {
         if (error) {
@@ -188,12 +190,13 @@ WhenIWork.prototype._makeRequest = function(method, request, params, headers, ca
             callback(error);
         } else {
             try {
-                callback(JSON.parse(body));
+                JSONbody = JSON.parse(body);
             }
             catch(error) {
                 console.trace(error);
-                callback(error);
+                callback('Error: ', error, 'Request: ', request, 'Params: ', params);
             }
+            callback(JSONbody);
         }
     });
 };
