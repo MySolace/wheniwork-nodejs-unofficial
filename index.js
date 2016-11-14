@@ -186,15 +186,16 @@ WhenIWork.prototype._makeRequest = function(method, request, params, headers, ca
 
     Request(options, function (error, response, body) {
         if (error) {
-            console.trace(error);
+            console.trace('Error:', error, 'options:', JSON.stringify(options));
             callback(error);
         } else {
             try {
                 JSONbody = JSON.parse(body);
             }
-            catch(error) {
-                console.trace(error);
-                if(body) callback(body);
+            catch(err) {
+                console.trace('Error:', err, 'options:', JSON.stringify(options));
+                if (body) callback(body);
+                else callback(err);
             }
             callback(JSONbody);
         }
