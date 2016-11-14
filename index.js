@@ -1,5 +1,5 @@
 
-var VERSION = '0.2.6';
+var VERSION = '0.2.7';
 
 var Request = require('request');
 
@@ -24,7 +24,7 @@ WhenIWork.prototype._login = function (options, failureCallback) {
     };
 
     this._makeRequest('login', 'post', params, {'W-Key': options.key}, function (response) {
-        if (response.login && response.login.token) {
+        if (response && response.login && response.login.token) {
             self.headers['W-Token'] = options.companyName ? findToken(response, options.companyName) : response.login.token;
             self.authenticated = true;
         } else {
@@ -192,9 +192,10 @@ WhenIWork.prototype._makeRequest = function(method, request, params, headers, ca
             try {
                 JSONbody = JSON.parse(body);
             }
-            catch(error) {
-                console.trace('Error:', error, 'options:', JSON.stringify(options));
-                callback(error);
+            catch(err) {
+                console.trace('Error:', err, 'options:', JSON.stringify(options));
+                if (body) callback(body);
+                else callback(err);
             }
             callback(JSONbody);
         }
