@@ -1,4 +1,8 @@
-#nodejs wrapper around the WhenIWork API.
+# nodejs wrapper around the WhenIWork API.
+
+[![Build Status](https://semaphoreci.com/api/v1/mysolace/wheniwork-nodejs-unofficial/branches/master/shields_badge.svg)](https://semaphoreci.com/mysolace/wheniwork-nodejs-unofficial)
+
+-
 
 The structure of this code comes from WhenIWork PHP API.
 
