@@ -1,6 +1,7 @@
 # nodejs wrapper around the WhenIWork API.
 
 [![Build Status](https://semaphoreci.com/api/v1/mysolace/wheniwork-nodejs-unofficial/branches/master/shields_badge.svg)](https://semaphoreci.com/mysolace/wheniwork-nodejs-unofficial)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1432/badge)](https://bestpractices.coreinfrastructure.org/projects/1432)
 
 ---
 
